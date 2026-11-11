@@ -1,0 +1,170 @@
+
+led.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+87800000 <_start>:
+87800000:	e59ff054 	ldr	pc, [pc, #84]	; 8780005c <finish+0x4>
+87800004:	e59ff054 	ldr	pc, [pc, #84]	; 87800060 <finish+0x8>
+87800008:	e59ff054 	ldr	pc, [pc, #84]	; 87800064 <finish+0xc>
+8780000c:	e59ff054 	ldr	pc, [pc, #84]	; 87800068 <finish+0x10>
+87800010:	e59ff054 	ldr	pc, [pc, #84]	; 8780006c <finish+0x14>
+87800014:	e320f000 	nop	{0}
+87800018:	e59ff050 	ldr	pc, [pc, #80]	; 87800070 <finish+0x18>
+8780001c:	e59ff050 	ldr	pc, [pc, #80]	; 87800074 <finish+0x1c>
+
+87800020 <_undef_handler>:
+87800020:	eafffffe 	b	87800020 <_undef_handler>
+
+87800024 <_softeware_handler>:
+87800024:	eafffffe 	b	87800024 <_softeware_handler>
+
+87800028 <_prefect_handler>:
+87800028:	eafffffe 	b	87800028 <_prefect_handler>
+
+8780002c <_data_handler>:
+8780002c:	eafffffe 	b	8780002c <_data_handler>
+
+87800030 <_irq_handler>:
+87800030:	eafffffe 	b	87800030 <_irq_handler>
+
+87800034 <_fiq_handler>:
+87800034:	eafffffe 	b	87800034 <_fiq_handler>
+
+87800038 <_reset_handler>:
+87800038:	f10c0080 	cpsid	i
+8780003c:	f10c0040 	cpsid	f
+87800040:	f1020012 	cps	#18
+87800044:	e3a0d482 	mov	sp, #-2113929216	; 0x82000000
+87800048:	f102001f 	cps	#31
+8780004c:	e3a0d321 	mov	sp, #-2080374784	; 0x84000000
+87800050:	f1080080 	cpsie	i
+87800054:	ea00003b 	b	87800148 <__main_from_arm>
+
+87800058 <finish>:
+87800058:	eafffffe 	b	87800058 <finish>
+8780005c:	87800038 			; <UNDEFINED> instruction: 0x87800038
+87800060:	87800020 	strhi	r0, [r0, r0, lsr #32]
+87800064:	87800024 	strhi	r0, [r0, r4, lsr #32]
+87800068:	87800028 	strhi	r0, [r0, r8, lsr #32]
+8780006c:	8780002c 	strhi	r0, [r0, ip, lsr #32]
+87800070:	87800030 			; <UNDEFINED> instruction: 0x87800030
+87800074:	87800034 			; <UNDEFINED> instruction: 0x87800034
+
+87800078 <led_init>:
+87800078:	b480      	push	{r7}
+8780007a:	af00      	add	r7, sp, #0
+8780007c:	2368      	movs	r3, #104	; 0x68
+8780007e:	f2c0 230e 	movt	r3, #526	; 0x20e
+87800082:	2205      	movs	r2, #5
+87800084:	601a      	str	r2, [r3, #0]
+87800086:	f44f 733d 	mov.w	r3, #756	; 0x2f4
+8780008a:	f2c0 230e 	movt	r3, #526	; 0x20e
+8780008e:	f241 02b0 	movw	r2, #4272	; 0x10b0
+87800092:	601a      	str	r2, [r3, #0]
+87800094:	f24c 0304 	movw	r3, #49156	; 0xc004
+87800098:	f2c0 2309 	movt	r3, #521	; 0x209
+8780009c:	f24c 0204 	movw	r2, #49156	; 0xc004
+878000a0:	f2c0 2209 	movt	r2, #521	; 0x209
+878000a4:	6812      	ldr	r2, [r2, #0]
+878000a6:	f042 0208 	orr.w	r2, r2, #8
+878000aa:	601a      	str	r2, [r3, #0]
+878000ac:	46bd      	mov	sp, r7
+878000ae:	f85d 7b04 	ldr.w	r7, [sp], #4
+878000b2:	4770      	bx	lr
+
+878000b4 <led_on>:
+878000b4:	b480      	push	{r7}
+878000b6:	af00      	add	r7, sp, #0
+878000b8:	f44f 4340 	mov.w	r3, #49152	; 0xc000
+878000bc:	f2c0 2309 	movt	r3, #521	; 0x209
+878000c0:	f44f 4240 	mov.w	r2, #49152	; 0xc000
+878000c4:	f2c0 2209 	movt	r2, #521	; 0x209
+878000c8:	6812      	ldr	r2, [r2, #0]
+878000ca:	f022 0208 	bic.w	r2, r2, #8
+878000ce:	601a      	str	r2, [r3, #0]
+878000d0:	46bd      	mov	sp, r7
+878000d2:	f85d 7b04 	ldr.w	r7, [sp], #4
+878000d6:	4770      	bx	lr
+
+878000d8 <led_off>:
+878000d8:	b480      	push	{r7}
+878000da:	af00      	add	r7, sp, #0
+878000dc:	f44f 4340 	mov.w	r3, #49152	; 0xc000
+878000e0:	f2c0 2309 	movt	r3, #521	; 0x209
+878000e4:	f44f 4240 	mov.w	r2, #49152	; 0xc000
+878000e8:	f2c0 2209 	movt	r2, #521	; 0x209
+878000ec:	6812      	ldr	r2, [r2, #0]
+878000ee:	f042 0208 	orr.w	r2, r2, #8
+878000f2:	601a      	str	r2, [r3, #0]
+878000f4:	46bd      	mov	sp, r7
+878000f6:	f85d 7b04 	ldr.w	r7, [sp], #4
+878000fa:	4770      	bx	lr
+
+878000fc <led_delay>:
+878000fc:	b480      	push	{r7}
+878000fe:	b083      	sub	sp, #12
+87800100:	af00      	add	r7, sp, #0
+87800102:	6078      	str	r0, [r7, #4]
+87800104:	bf00      	nop
+87800106:	687b      	ldr	r3, [r7, #4]
+87800108:	1e5a      	subs	r2, r3, #1
+8780010a:	607a      	str	r2, [r7, #4]
+8780010c:	2b00      	cmp	r3, #0
+8780010e:	d1fa      	bne.n	87800106 <led_delay+0xa>
+87800110:	370c      	adds	r7, #12
+87800112:	46bd      	mov	sp, r7
+87800114:	f85d 7b04 	ldr.w	r7, [sp], #4
+87800118:	4770      	bx	lr
+8780011a:	bf00      	nop
+
+8780011c <main>:
+8780011c:	b580      	push	{r7, lr}
+8780011e:	af00      	add	r7, sp, #0
+87800120:	f7ff ffaa 	bl	87800078 <led_init>
+87800124:	f7ff ffc6 	bl	878000b4 <led_on>
+87800128:	f64f 70ff 	movw	r0, #65535	; 0xffff
+8780012c:	f2c0 0003 	movt	r0, #3
+87800130:	f7ff ffe4 	bl	878000fc <led_delay>
+87800134:	f7ff ffd0 	bl	878000d8 <led_off>
+87800138:	f64f 70ff 	movw	r0, #65535	; 0xffff
+8780013c:	f2c0 0003 	movt	r0, #3
+87800140:	f7ff ffdc 	bl	878000fc <led_delay>
+87800144:	e7ee      	b.n	87800124 <main+0x8>
+87800146:	bf00      	nop
+
+87800148 <__main_from_arm>:
+87800148:	e51ff004 	ldr	pc, [pc, #-4]	; 8780014c <__main_from_arm+0x4>
+8780014c:	8780011d 	usada8hi	r0, sp, r1, r0
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347 	bcc	10d0d24 <_start-0x8672f2dc>
+   4:	694c2820 	stmdbvs	ip, {r5, fp, sp}^
+   8:	6f72616e 	svcvs	0x0072616e
+   c:	43434720 	movtmi	r4, #14112	; 0x3720
+  10:	392e3420 	stmdbcc	lr!, {r5, sl, ip, sp}
+  14:	3130322d 	teqcc	r0, sp, lsr #4
+  18:	31302e37 	teqcc	r0, r7, lsr lr
+  1c:	2e342029 	cdpcs	0, 3, cr2, cr4, cr9, {1}
+  20:	00342e39 	eorseq	r2, r4, r9, lsr lr
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00003041 	andeq	r3, r0, r1, asr #32
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000026 	andeq	r0, r0, r6, lsr #32
+  10:	412d3705 	teqmi	sp, r5, lsl #14
+  14:	070a0600 	streq	r0, [sl, -r0, lsl #12]
+  18:	09010841 	stmdbeq	r1, {r0, r6, fp}
+  1c:	12040a02 	andne	r0, r4, #8192	; 0x2000
+  20:	15011404 	strne	r1, [r1, #-1028]	; 0x404
+  24:	18031701 	stmdane	r3, {r0, r8, r9, sl, ip}
+  28:	1b021a01 	blne	86834 <_start-0x877797cc>
+  2c:	22011c03 	andcs	r1, r1, #768	; 0x300
+  30:	Address 0x0000000000000030 is out of bounds.
+

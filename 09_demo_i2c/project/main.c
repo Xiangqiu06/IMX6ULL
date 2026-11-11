@@ -1,0 +1,43 @@
+#include "MCIMX6Y2.h"
+#include "fsl_iomuxc.h"
+#include "led.h"
+#include "beep.h"
+#include "key.h"
+#include "interrupt.h"
+#include "clock.h"
+#include "epit.h"
+#include "gpt.h"
+#include "uart.h"
+#include "stdio.h"
+
+int main(void)
+{
+    system_interrupt_init();
+    clock_init();
+    led_init();
+    beep_init();
+    key_init();
+    //epit1_init();
+    gpt1_init();
+    uart1_init();
+    //unsigned char ch = 0;
+    unsigned int num1 = 0, num2 = 0;
+    while(1)
+    {
+        //if (key_check())
+        //{
+        //    led_nor();
+        //     beep_nor();
+        //}
+        led_nor();
+        //delay_ms(1000);
+        //delay_us(1000 * 1000);
+        scanf("%d %d", &num1, &num2);
+        printf("%d + %d = %d\n",num1, num2, num1 + num2);
+        //ch = getc();
+        //putc(ch);
+        //puts("hello world!");
+        //led_delay(0x3FFFF);
+    }
+    return 0;
+}
